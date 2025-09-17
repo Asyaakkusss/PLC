@@ -76,6 +76,39 @@ public class SpartieScanner {
         // For example: < or <=
         char nextCharacter = source.charAt(current);
 
+        TokenType tok = null; 
+
+        switch(nextCharacter) {
+            case '<':
+            {
+
+                if ((current + 1) < source.length() && source.charAt(current + 1) == '=') {
+                    tok = TokenType.LESS_EQUAL; 
+                    current = current + 2; 
+                    return new Token(tok, "<=", line);
+                }
+                else {
+                    tok = TokenType.LESS_THAN;
+                    current++;
+                    return new Token(tok, "<", line);
+                }
+            }
+            case '>':
+            {
+                if ((current + 1) < source.length() && source.charAt(current + 1) == '=') {
+                    tok = TokenType.GREATER_EQUAL; 
+                    current = current + 2; 
+                    return new Token(tok, ">=", line);
+                }
+                else {
+                    tok = TokenType.GREATER_THAN;
+                    current++;
+                    return new Token(tok, "<", line);
+                }
+            }
+
+        }
+
         return null;
     }
 
