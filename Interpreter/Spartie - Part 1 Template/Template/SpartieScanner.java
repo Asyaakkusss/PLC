@@ -60,12 +60,55 @@ public class SpartieScanner {
     // TODO: Complete implementation
     private Token getSingleCharacterToken() {
         // Hint: Examine the character, if you can get a token, return it, otherwise return null
-        // Hint: Be careful with the divide, we have ot know if it is a single character
+        // Hint: Be careful with the divide, we have to know if it is a single character
 
         char nextCharacter = source.charAt(current);
+        String text = String.valueOf(nextCharacter); // stores current char as string -- used when declaring new token
 
         // Hint: Start of not knowing what the token is, if we can determine it, return it, otherwise, return null
         TokenType type = TokenType.UNDEFINED;
+
+            switch (nextCharacter) {
+                case '(':
+                    type = TokenType.LEFT_PARENT; 
+                    break;
+                case ')':
+                    type = TokenType.RIGHT_PARENT; 
+                    break;
+                case '{':
+                    type = TokenType.LEFT_BRACE; 
+                    break;
+                case '}':
+                    type = TokenType.RIGHT_BRACE; 
+                    break;
+                case ';':
+                    type = TokenType.SEMICOLON; 
+                    break;
+                case ',':
+                    type = TokenType.COMMA; 
+                    break;
+                case '+':
+                    type = TokenType.ADD; 
+                    break;
+                case '-':
+                    type = TokenType.SUBTRACT; 
+                    break;
+                case '*':
+                    type = TokenType.MULTIPLY; 
+                    break;
+                case '&':
+                    type = TokenType.AND; break;
+                case '|':
+                    type = TokenType.OR; break;
+                default: 
+                    return null; // other tokens (=, /, ! for example) will be handled elsewhere
+                }
+
+        if (type != null)
+        {
+            current++
+            return new Token(type, text, line)
+        }
 
         return null;
     }
@@ -106,7 +149,24 @@ public class SpartieScanner {
                     return new Token(tok, "<", line);
                 }
             }
-
+            case '=': // ASSIGN vs EQUIVALENT
+                if ((current + 1) < source.length() && source.charAt(current + 1) == '=') {
+                    current += 2;
+                    return new Token(TokenType.EQUIVALENT, "==", line);
+                } 
+                else {
+                    current++;
+                    return new Token(TokenType.ASSIGN, "=", line);
+                }
+            case '!': // NOT_EQUAL vs NOT
+                if ((current + 1) < source.length() && source.charAt(current + 1) == '=') {
+                    current += 2;
+                    return new Token(TokenType.NOT_EQUAL, "!=", line);
+                } 
+                else {
+                    current++;
+                    return new Token(TokenType.NOT, "!", line);
+                }
         }
 
         return null;
