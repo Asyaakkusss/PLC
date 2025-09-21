@@ -171,7 +171,7 @@ public class SpartieScanner {
         return null;
     }
 
-    // TODO: testing
+    // TODO: test code 
     private Token getNumericToken() {
         // Hint: Follow similar idea of String, but in this case if it is a digit
         // You should only allow one period in your scanner
@@ -205,6 +205,29 @@ public class SpartieScanner {
     // TODO: Complete implementation
     private Token getIdentifierOrReservedWord() {
         // Hint: Assume first it is an identifier and once you capture it, then check if it is a reserved word.
+        char nextCharacter = source.charAt(current); 
+        TokenType tok = TokenType.IDENTIFIER; 
+
+        if (isAlpha(nextCharacter)) {
+            int start = current; 
+            int end; 
+
+            while (current < source.length() && (isAlpha(source.charAt(current)))) {
+                current++;
+            }
+            end = current; 
+            String string = source.substring(start, end); 
+
+            tok = keywords.get(string);
+            
+            if (tok == null) {
+                tok = TokenType.IDENTIFIER; 
+            }
+
+            return new Token(tok, string, line); 
+    
+        }
+
         return null;
     }
     
