@@ -70,7 +70,7 @@ public class SpartieScanner {
         return null;
     }
 
-    // TODO: Complete implementation
+    // TODO: test code 
     private Token getComparisonToken() {
         // Hint: Examine the character for a comparison but check the next character (as long as one is available)
         // For example: < or <=
@@ -116,7 +116,26 @@ public class SpartieScanner {
     private Token getDivideOrComment() {
         // Hint: Examine the character for a comparison but check the next character (as long as one is available)
         char nextCharacter = source.charAt(current);
+        TokenType tok = null; 
 
+        if (nextCharacter == '/') {
+
+            if (current + 1 < source.length() && source.charAt(current + 1) == '/') {
+                current = current + 2;
+
+                while (current < source.length() && source.charAt(current) != '\n') {
+                    current++;
+                }
+                tok = TokenType.IGNORE; 
+                return new Token(tok, "//", line);
+            } 
+            
+            else {
+                current++;
+                tok = TokenType.DIVIDE; 
+                return new Token(tok, "/", line);
+            }
+        }
         return null;
     }
 
