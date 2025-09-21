@@ -144,8 +144,30 @@ public class SpartieScanner {
         // Hint: Check if you have a double quote, then keep reading until you hit another double quote
         // But, if you do not hit another double quote, you should report an error
         char nextCharacter = source.charAt(current);
+        String string = null; 
+        int end; 
+        int start; 
+        TokenType tok = null; 
+        
+        if (nextCharacter == '"') {
 
-        String string = null;
+            current++; 
+            start = current; 
+            while (current < source.length() && source.charAt(current) != '\n') {
+                if (source.charAt(current) == '"') {
+                    end = current; 
+                    string = source.substring(start, end); 
+                    tok = TokenType.STRING; 
+                    current++; 
+                    return new Token(tok, string, line); 
+                }
+                current++; 
+                        
+            }
+            error(line, "Unterminated String");
+
+        }
+
 
         return null;
     }
