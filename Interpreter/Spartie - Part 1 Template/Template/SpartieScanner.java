@@ -61,7 +61,7 @@ public class SpartieScanner {
     private Token getSingleCharacterToken() {
         // Hint: Examine the character, if you can get a token, return it, otherwise return null
         // Hint: Be careful with the divide, we have to know if it is a single character
-
+        skipWhitespace(); // ignores whitespace before trying to get a token
         char nextCharacter = source.charAt(current);
         String text = String.valueOf(nextCharacter); // stores current char as string -- used when declaring new token
 
@@ -70,10 +70,10 @@ public class SpartieScanner {
 
             switch (nextCharacter) {
                 case '(':
-                    type = TokenType.LEFT_PARENT; 
+                    type = TokenType.LEFT_PAREN; 
                     break;
                 case ')':
-                    type = TokenType.RIGHT_PARENT; 
+                    type = TokenType.RIGHT_PAREN; 
                     break;
                 case '{':
                     type = TokenType.LEFT_BRACE; 
@@ -106,8 +106,8 @@ public class SpartieScanner {
 
         if (type != null)
         {
-            current++
-            return new Token(type, text, line)
+            current++;
+            return new Token(type, text, line);
         }
 
         return null;
@@ -299,6 +299,26 @@ public class SpartieScanner {
     private boolean isAlpha(char character) {
         return character >= 'a' && character <= 'z' ||
                 character >= 'A' && character <= 'Z';
+    }
+
+    // skips whitespace in the txt files passed in
+    private void skipWhitespace() {
+        while (!isAtEnd()) { // doesn't look at white space at the end 
+            char curr = source.charAt(current);
+            switch (curr) {
+                case ' ':
+                case '\r':
+                case '\t':
+                    current++;
+                    break;
+                case '\n':
+                    line++;
+                    current++;
+                    break;
+                default:
+                    return; // stop skipping
+            }
+        }
     }
 
     // This will check if a character is what you expect, if so, it will advance
