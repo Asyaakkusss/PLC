@@ -112,7 +112,7 @@ public class SpartieScanner {
         return null;
     }
 
-    // TODO: Complete implementation
+    // TODO: test code
     private Token getDivideOrComment() {
         // Hint: Examine the character for a comparison but check the next character (as long as one is available)
         char nextCharacter = source.charAt(current);
@@ -168,14 +168,37 @@ public class SpartieScanner {
 
         }
 
-
         return null;
     }
 
-    // TODO: Complete implementation
+    // TODO: testing
     private Token getNumericToken() {
         // Hint: Follow similar idea of String, but in this case if it is a digit
         // You should only allow one period in your scanner
+        char nextCharacter = source.charAt(current); 
+
+        if (isDigit(nextCharacter)) {
+            int start = current;
+    
+            while (current < source.length() && isDigit(source.charAt(current))) {
+                current++;
+            }
+    
+            if (current < source.length() && source.charAt(current) == '.') {
+
+                if ((current + 1) < source.length() && isDigit(source.charAt(current + 1))) {
+                    current++; 
+                    while (current < source.length() && isDigit(source.charAt(current))) {
+                        current++;
+                    }
+                }
+            }
+    
+            String number = source.substring(start, current);
+            TokenType tok = TokenType.NUMBER;
+            return new Token(tok, number, line);
+        }
+    
         return null;
     }
 
