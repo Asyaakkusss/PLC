@@ -14,15 +14,29 @@ open class Node (var text: String) {
 }
 
 class MarkdownNode: Node {
+
+    var type: Int = 0
+
+    constructor (text:String) : super(text)
+
     override fun toHTML(): String {
-        return when (type) {
-            // TODO: implement markdown to HTML conversion
-            // I was thinking of using a switch here/the kotlin equivalent (not sure what it's techinally called in kotlin)
-            // I assigned numbers to each markdown type in MarkdownParser. Change however you want though
-            else -> text // placeholder
-        }
+        
+            return when (type) {
+                1 -> "<h3>$text</h3>"  
+                2 -> "<h2>$text</h2>"
+                3 -> "<h1>$text</h1>"  
+                4 -> "<b>$text</b>"
+                5 -> "<i>$text</i>"
+                6 -> "<blockquote>$text</blockquote>" 
+                7 -> "<hr />"                
+                0 -> "<p>$text</p>"
+            }
+
+            else -> text
+    
     }
 }
+
 
 // MarkdownParser implementing CodeParser
 // TODO: Can you please check my regex? I am not 100% sure if it's correct.
@@ -37,40 +51,56 @@ class MarkdownParser : CodeParser {
                 // header level 3
                 trimmed.matches(Regex("^#{3}\s+(.+)$")) -> {
                     val content = trimmed.removePrefix("### ").trim()
-                    nodes.add(MarkdownNode(content, 1))
+                    val node = MarkdownNode(content)
+                    node.type = 1
+                    nodes.add(node)
                 }
                 // header level 2
                 trimmed.matches(Regex("^#{2}\s+(.+)$")) -> {
                     val content = trimmed.removePrefix("## ").trim()
-                    nodes.add(MarkdownNode(content, 2))
+                    val node = MarkdownNode(content)
+                    node.type = 2
+                    nodes.add(node)
                 }
                 // header level 1
                 trimmed.matches(Regex("^#{1}\s+(.+)$")) -> {
                     val content = trimmed.removePrefix("# ").trim()
-                    nodes.add(MarkdownNode(content, 3))
+                    val node = MarkdownNode(content)
+                    node.type = 3
+                    nodes.add(node)
                 }
                 // bold
                 trimmed.matches(Regex("^\*\*(.+)\*\*$")) -> {
                     val content = trimmed.removeSurrounding("**").trim()
-                    nodes.add(MarkdownNode(content, 4))
+                    val node = MarkdownNode(content)
+                    node.type = 4
+                    nodes.add(node)
                 }
                 // italic
                 trimmed.matches(Regex("^\*(.+)\*$")) -> {
                     val content = trimmed.removeSurrounding("*").trim()
-                    nodes.add(MarkdownNode(content, 5))
+                    val node = MarkdownNode(content)
+                    node.type = 5
+                    nodes.add(node)
                 }
                 // block quote
                 trimmed.matches(Regex("^>\s+(.*)$")) -> {
                     val content = trimmed.removePrefix("> ").trim()
-                    nodes.add(MarkdownNode(content, 6))
+                    val node = MarkdownNode(content)
+                    node.type = 6
+                    nodes.add(node)
                 }
                 // horizontal line
-                trimmed.matches(Regex("^---$")) -> { //
-                    nodes.add(MarkdownNode("", 7))
+                trimmed.matches(Regex("^---$")) -> { 
+                    val node = MarkdownNode("")
+                    node.type = 7
+                    nodes.add(node)
                 }
                 // regular text
                 trimmed.isNotEmpty() -> { 
-                    nodes.add(MarkdownNode(trimmed, 0))
+                    val node = MarkdownNode(trimmed)
+                    node.type = 0
+                    nodes.add(node)                    
                 }
             }
         }
