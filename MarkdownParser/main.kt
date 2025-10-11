@@ -29,17 +29,13 @@ class MarkdownNode: Node {
                 5 -> "<i>$text</i>"
                 6 -> "<blockquote>$text</blockquote>" 
                 7 -> "<hr />"                
-                0 -> "<p>$text</p>"
+                else -> text
             }
-
-            else -> text
-    
     }
 }
 
 
 // MarkdownParser implementing CodeParser
-// TODO: Can you please check my regex? I am not 100% sure if it's correct.
 class MarkdownParser : CodeParser {
     override fun parseCode(filename: String): List<Node> {
         val lines = File(filename).readLines()
@@ -49,49 +45,49 @@ class MarkdownParser : CodeParser {
             val trimmed = line.trim() // trim leading/trailing whitespace
             when {
                 // header level 3
-                trimmed.matches(Regex("^#{3}\s+(.+)$")) -> {
+                trimmed.matches(Regex("""^#{3}\s+(.+)$""")) -> {
                     val content = trimmed.removePrefix("### ").trim()
                     val node = MarkdownNode(content)
                     node.type = 1
                     nodes.add(node)
                 }
                 // header level 2
-                trimmed.matches(Regex("^#{2}\s+(.+)$")) -> {
+                trimmed.matches(Regex("""^#{2}\s+(.+)$""")) -> {
                     val content = trimmed.removePrefix("## ").trim()
                     val node = MarkdownNode(content)
                     node.type = 2
                     nodes.add(node)
                 }
                 // header level 1
-                trimmed.matches(Regex("^#{1}\s+(.+)$")) -> {
+                trimmed.matches(Regex("""^#{1}\s+(.+)$""")) -> {
                     val content = trimmed.removePrefix("# ").trim()
                     val node = MarkdownNode(content)
                     node.type = 3
                     nodes.add(node)
                 }
                 // bold
-                trimmed.matches(Regex("^\*\*(.+)\*\*$")) -> {
+                trimmed.matches(Regex("""^\*\*(.+)\*\*$""")) -> {
                     val content = trimmed.removeSurrounding("**").trim()
                     val node = MarkdownNode(content)
                     node.type = 4
                     nodes.add(node)
                 }
                 // italic
-                trimmed.matches(Regex("^\*(.+)\*$")) -> {
+                trimmed.matches(Regex("""^\*(.+)\*$""")) -> {
                     val content = trimmed.removeSurrounding("*").trim()
                     val node = MarkdownNode(content)
                     node.type = 5
                     nodes.add(node)
                 }
                 // block quote
-                trimmed.matches(Regex("^>\s+(.*)$")) -> {
+                trimmed.matches(Regex("""^>\s+(.*)$""")) -> {
                     val content = trimmed.removePrefix("> ").trim()
                     val node = MarkdownNode(content)
                     node.type = 6
                     nodes.add(node)
                 }
                 // horizontal line
-                trimmed.matches(Regex("^---$")) -> { 
+                trimmed.matches(Regex("""^---$""")) -> { 
                     val node = MarkdownNode("")
                     node.type = 7
                     nodes.add(node)
