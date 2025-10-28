@@ -77,7 +77,7 @@ public class SpartieInterpreter {
             case MULTIPLY:
                 return (double)left * (double)right; 
             case DIVIDE:
-                if ((double)right == 0) return null; 
+                if ((double)right == 0) error("Division by zero invalid"); 
                 return (double)left/(double)right; 
             case GREATER_THAN:
                 return (double)left > (double)right; 
