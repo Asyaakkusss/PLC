@@ -1,3 +1,5 @@
+/*Asya Akkus (aya29) and Kaia Kanj (kmk233) */
+
 public class SpartieInterpreter {
     Object run(Expression expression) {
         Object result = interpret(expression);
