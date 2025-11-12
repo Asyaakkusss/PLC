@@ -1,0 +1,122 @@
+Welcome to the Logical Advisor
+What would you like to do?
+    1. Show Major Requirements
+    2. Check Elective Course
+    3. Check Prerequisites
+    4. Check Courses for Language
+    Anything Else. Quit
+Enter Choice: 1.
+Core Courses
+csds132
+csds233
+csds281
+csds302
+csds310
+csds395
+
+Breadth Area 1 Courses (Choose 2)
+csds341
+csds356
+csds390
+csds393
+
+Breadth Area 2 Courses (Choose 2)
+csds312
+csds314
+csds325
+csds338
+
+Breadth Area 3 Courses (Choose 2)
+csds337
+csds343
+csds344
+csds345
+
+Breadth Area 4 Courses (Choose 2)
+csds313
+csds335
+csds340
+csds391
+
+Security Course (Choose 1)
+csds344
+csds356
+csds427
+csds444
+csds448
+
+
+Welcome to the Logical Advisor
+What would you like to do?
+    1. Show Major Requirements
+    2. Check Elective Course
+    3. Check Prerequisites
+    4. Check Courses for Language
+    Anything Else. Quit
+Enter Choice: |: 2.
+Enter Elective Course|: csds301.
+csds301 is an elective 
+
+
+Welcome to the Logical Advisor
+What would you like to do?
+    1. Show Major Requirements
+    2. Check Elective Course
+    3. Check Prerequisites
+    4. Check Courses for Language
+    Anything Else. Quit
+Enter Choice: |: 2.
+Enter Elective Course|: csds333.
+csds333 is not an elective 
+
+
+Welcome to the Logical Advisor
+What would you like to do?
+    1. Show Major Requirements
+    2. Check Elective Course
+    3. Check Prerequisites
+    4. Check Courses for Language
+    Anything Else. Quit
+Enter Choice: |: 3.
+Enter Course to get prereqs|: csds310.
+    Prereq: csds302
+    Prereq: csds233
+    Prereq: csds132
+
+
+Welcome to the Logical Advisor
+What would you like to do?
+    1. Show Major Requirements
+    2. Check Elective Course
+    3. Check Prerequisites
+    4. Check Courses for Language
+    Anything Else. Quit
+Enter Choice: |: 4.
+Enter language: 
+|: 'Java'.
+  The below courses include Java
+csds132
+csds233
+
+Welcome to the Logical Advisor
+What would you like to do?
+    1. Show Major Requirements
+    2. Check Elective Course
+    3. Check Prerequisites
+    4. Check Courses for Language
+    Anything Else. Quit
+Enter Choice: |: 4.
+Enter language: 
+|: 'Python'.
+  Sorry, no courses include Python
+
+Welcome to the Logical Advisor
+What would you like to do?
+    1. Show Major Requirements
+    2. Check Elective Course
+    3. Check Prerequisites
+    4. Check Courses for Language
+    Anything Else. Quit
+Enter Choice: |: 5.
+Have a good day!
+true .
