@@ -45,7 +45,7 @@ is_elective(Course) :-
 is_prereq(Course) :-
     prereq(Course, Prereqs), 
     print_prereq(Prereqs).
-
+% print out the prereqs on the screen 
 print_prereq([]).
 print_prereq([H|T]) :-
     format('    Prereq: ~w~n', [H]),
@@ -55,7 +55,7 @@ print_prereq([H|T]) :-
 % make menu
 
 menu :-
-    write('Welcome to the logical advisor'), nl,
+    write('Welcome to the Logical Advisor'), nl,
     write('What would you like to do?'), nl,
     write('    1. Show Major Requirements'), nl,
     write('    2. Check Elective Course'), nl,
@@ -68,19 +68,23 @@ menu :-
 	
 	handler(1) :- 
     	write('Core Courses'), nl,
-    	corecourses(C), print_list(C),
-		security(S), print_list(S), 
+    	corecourses(C), print_list(C), nl,
     	breadth(N, List),
-    	print_list(List). 
+    	print_list(List),
+    	write('Security Course (Choose 1)'), nl,
+		security(S), print_list(S). 
 	handler(2) :-
-    	write('Elective checker: enter an elective'), 
+    	write('Enter Elective Course'), 
     	read(C), 
 		is_elective(C).
 	handler(3) :-
-    	write('Get course prereqs'),
+    	write('Enter Course to get prereqs'),
     	read(C),
     	is_prereq(C).
-	handler(4)
+	handler(4) :-
+		write('Enter Language'),
+		read(C),
+		course_language(X, C). 
     
 
 
