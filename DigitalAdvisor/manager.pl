@@ -1,4 +1,4 @@
-
+% Kaia Kanj (kmk233) and Asya Akkus (aya29)
 
 %this portion of the script lists out all the courses 
 
