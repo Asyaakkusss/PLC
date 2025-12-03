@@ -1,3 +1,6 @@
+//Kaia Kanj (kmk233) and Asya Akkus (aya29)
+
+
 public class ErrorCode {
     public static int
             INCORRECT_USAGE = 1,

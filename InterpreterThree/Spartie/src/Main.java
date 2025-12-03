@@ -1,8 +1,10 @@
+//Kaia Kanj (kmk233) and Asya Akkus (aya29)
+
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
